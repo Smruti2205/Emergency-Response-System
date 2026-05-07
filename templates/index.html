@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Emergency Response System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 15px;
+            text-align: left;
+            color: #34495e;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+        }
+
+        .admin-button {
+            background-color: #3498db;
+            margin-top: 20px;
+        }
+
+        .admin-button:hover {
+            background-color: #2980b9;
+        }
+
+        p {
+            color: #2c3e50;
+            margin-top: 15px;
+        }
+
+        .flash-message {
+            color: green;
+            margin-bottom: 20px;
+        }
+    </style>
+
+    <script>
+        function getLocation() {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                document.getElementById("latitude").value = position.coords.latitude;
+                document.getElementById("longitude").value = position.coords.longitude;
+            });
+        }
+        document.addEventListener('DOMContentLoaded', getLocation);
+
+        document.addEventListener('keydown', function (e) {
+            if (e.ctrlKey && e.key === 'e') {
+                document.getElementById('panicForm').submit();
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>🚨 Emergency Response System</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <p class="flash-message">{{ message }}</p>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        
+        <!-- Panic Button Form -->
+        <form id="panicForm" action="/send_alert" method="POST">
+            <input type="hidden" name="latitude" id="latitude">
+            <input type="hidden" name="longitude" id="longitude">
+            <input type="hidden" name="user_id" value="1">
+            
+            <label>Your Name:
+                <input type="text" name="name" required>
+            </label>
+            
+            <label>Medical Info (optional):
+                <input type="text" name="condition">
+            </label>
+            
+            <label>Emergency Contact:
+                <input type="text" name="contact" placeholder="contact@gmail.com" required>
+            </label>
+            
+            <button type="submit">🚨 Send Emergency Alert</button>
+        </form>
+
+        
+
+        <!-- Admin Dashboard Access Button -->
+        <button class="admin-button" onclick="window.location.href='/admin/dashboard'">👮 Admin Dashboard</button>
+    </div>
+</body>
+</html>

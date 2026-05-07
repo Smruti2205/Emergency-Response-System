@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emergency Alert Map</title>
+    <meta charset="utf-8">
+    <style>
+        body { margin: 0; padding: 0; font-family: sans-serif; }
+        #map { height: 90vh; width: 100%; }
+        h2 { text-align: center; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h2>📍 Live Emergency Alert Map</h2>
+    <div id="map">{{ map_html|safe }}</div>
+</body>
+</html>

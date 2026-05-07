@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Set Scheduled Check-In</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            padding: 30px;
+        }
+        .form-container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .back {
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>🕒 Schedule a Safety Check-In</h2>
+        <form action="{{ url_for('set_checkin') }}" method="POST">
+            <input type="text" name="user_id" required placeholder="Enter your User ID" />
+            <input type="datetime-local" name="checkin_time" required />
+            <input type="email" name="emergency_email" required placeholder="Enter Emergency Contact Email" />
+            <button type="submit">Submit</button>
+        </form>
+
+        <!-- "I'm Safe" Button -->
+        <form method="POST" action="/mark_safe">
+            <button type="submit">I'm Safe</button>
+        </form>
+    </div>
+</body>
+</html>
