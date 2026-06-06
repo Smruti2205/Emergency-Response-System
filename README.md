@@ -178,12 +178,6 @@ ADMIN_EMAIL=admin@example.com
 SECRET_KEY=your_secret_key
 ```
 
-## Gmail Configuration
-
-1. Enable Two-Factor Authentication on your Google account.
-2. Generate a Gmail App Password.
-3. Add the generated password to the `.env` file.
-
 ## Running the Application
 
 ```bash
